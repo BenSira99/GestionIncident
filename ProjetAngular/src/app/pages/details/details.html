@@ -1,0 +1,93 @@
+<div class="details-page conteneur-principal" [class.mode-cinema]="modeCinema()" *ngIf="!chargement() && film() as f">
+  
+  <div class="hero-section animation-apparition">
+    <div class="fond-flou-container" #arrierePlanGlow>
+      <img [src]="obtenirAffiche()" class="fond-flou">
+    </div>
+    <div class="actions-cinema">
+      <button class="bouton-mode-cinema" (click)="basculerModeCinema()">
+        {{ modeCinema() ? 'Quitter le mode cinéma' : '🎬 Mode Cinéma' }}
+      </button>
+      <button class="bouton-externe-cinema" (click)="redirigerVersYouTube()">
+        ▶️ Voir la bande annonce sur Films Actu
+      </button>
+    </div>
+
+    <!-- Lecteur Vidéo Mode Cinéma -->
+    <div class="lecteur-cinema-container effet-verre" *ngIf="modeCinema() && urlBandeAnnonce()">
+      <div class="header-cinema">
+        <h2 class="titre-cinema-mode">🎬 Visionnage en Mode Cinéma</h2>
+        <button class="bouton-fermer-cinema" (click)="basculerModeCinema()">✖ Quitter</button>
+      </div>
+      <div class="cinema-video-wrapper">
+        <iframe [src]="urlBandeAnnonce()" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="footer-cinema">
+        <p>Aperçu proposé en mode immersif. Pour voir plus de nouveautés :</p>
+        <button class="bouton-externe-yt-cinema" (click)="redirigerVersYouTube()">
+          📺 Ouvrir la recherche Films Actu sur YouTube
+        </button>
+      </div>
+    </div>
+    <div class="hero-contenu">
+      <div class="affiche-principale effet-verre">
+        <img #afficheImage [src]="obtenirAffiche()" [alt]="f.Title" crossorigin="anonymous" (load)="surImageChargee()">
+      </div>
+      <div class="textes-hero">
+        <div class="titre-et-favori">
+          <h1 class="titre-grand">{{ f.Title }}</h1>
+          <app-bouton-favori [film]="f"></app-bouton-favori>
+        </div>
+        <div class="metadata">
+
+          <span>📅 {{ f.Year }}</span>
+          <span>⏱️ {{ f.Runtime }}</span>
+          <span>🎬 {{ f.Genre }}</span>
+          <span class="classement">{{ f.Rated }}</span>
+        </div>
+        <p class="resumé">{{ f.Plot }}</p>
+        <div class="equipe">
+          <p><strong>Réalisateur :</strong> {{ f.Director }}</p>
+          <p><strong>Acteurs :</strong> {{ f.Actors }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="sections-details animation-apparition" style="animation-delay: 0.2s;">
+    <div class="grille-details">
+      <div class="carte-info effet-verre">
+        <h3>📊 Évaluations</h3>
+        <div class="evaluations">
+          <div *ngFor="let r of f.Ratings" class="eval-item">
+            <span class="source">{{ r.Source }}</span>
+            <span class="score vibrant">{{ r.Value }}</span>
+          </div>
+          <div class="eval-item">
+            <span class="source">IMDb Score</span>
+            <span class="score vibrant">{{ f.imdbRating }}/10</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="carte-info effet-verre">
+        <h3>🏢 Production & Box Office</h3>
+        <p><strong>Pays :</strong> {{ f.Country }}</p>
+        <p><strong>Langues :</strong> {{ f.Language }}</p>
+        <p><strong>Production :</strong> {{ f.Production }}</p>
+        <p><strong>Box Office :</strong> {{ f.BoxOffice }}</p>
+        <p><strong>Récompenses :</strong> {{ f.Awards }}</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div *ngIf="chargement()" class="chargement-etat conteneur-principal">
+  <div class="spinner"></div>
+</div>
+
+<div *ngIf="erreur()" class="erreur-etat conteneur-principal effet-verre">
+  <p>{{ erreur() }}</p>
+  <button routerLink="/" class="bouton-retour">Retour à l'accueil</button>
+</div>

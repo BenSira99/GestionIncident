@@ -1,0 +1,54 @@
+/* Thème Premium CineBenSira */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@500;700;900&display=swap');
+
+:root {
+  --fond-principal: #060e20;
+  --fond-secondaire: #0f1930;
+  --accent-primaire: #3bbffa;
+  --accent-secondaire: #9799ff;
+  --texte-principal: #dee5ff;
+  --texte-secondaire: #a3aac4;
+  --verre: rgba(25, 37, 64, 0.6);
+  --bordure-verre: rgba(255, 255, 255, 0.1);
+  --radius: 12px;
+  --transition-rapide: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  background-color: var(--fond-principal);
+  color: var(--texte-principal);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .titre-cinema {
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Glassmorphism Utility */
+.effet-verre {
+  background: var(--verre);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--bordure-verre);
+  border-radius: var(--radius);
+}
+
+/* Animations globales */
+.animation-apparition {
+  animation: apparition 0.6s var(--transition-rapide) forwards;
+}
+
+@keyframes apparition {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--fond-principal); }
+::-webkit-scrollbar-thumb { background: var(--accent-primaire); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-secondaire); }

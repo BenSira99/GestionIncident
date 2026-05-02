@@ -1,0 +1,38 @@
+<div class="recherche-page conteneur-principal">
+  
+  <section class="entete-recherche animation-apparition">
+    <h1 class="titre-cinema">Découvrez l'univers du <span class="vibrant">Cinéma</span></h1>
+    <div class="barre-recherche-container effet-verre">
+      <input type="text" 
+             [(ngModel)]="termeRecherche" 
+             (keyup.enter)="lancerRecherche()" 
+             placeholder="Rechercher un film, une série..." 
+             class="input-cinema">
+      <button (click)="lancerRecherche()" class="bouton-recherche">
+        <span class="icone-recherche">🔍</span> 
+      </button>
+    </div>
+  </section>
+
+  <section class="resultats-grid">
+    <div *ngIf="chargement()" class="chargement-etat">
+      <div class="spinner"></div>
+      <p>Exploration de la base de données...</p>
+    </div>
+
+    <div *ngIf="erreur()" class="erreur-etat effet-verre">
+      <p>{{ erreur() }}</p>
+    </div>
+
+    <div class="grille-films" *ngIf="!chargement() && films().length > 0">
+      <div *ngFor="let film of films()" class="carte-film-animate">
+        <app-carte-film [film]="film"></app-carte-film>
+      </div>
+    </div>
+
+    <div *ngIf="!chargement() && films().length === 0 && !erreur()" class="etat-vide">
+      <p>Entrez un titre pour commencer votre voyage cinématographique.</p>
+    </div>
+  </section>
+
+</div>

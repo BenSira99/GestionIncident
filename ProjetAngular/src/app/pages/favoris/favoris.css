@@ -1,0 +1,97 @@
+.favoris-page {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+.en-tete-page {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.titre-page {
+  font-size: 3.2rem;
+  margin-bottom: 12px;
+  font-family: 'Outfit', sans-serif;
+  color: var(--texte-principal);
+}
+
+.sous-titre {
+  color: var(--texte-secondaire);
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+.vibrant {
+  color: var(--accent-primaire);
+  background: linear-gradient(to right, #3bbffa, #70e1ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.grille-favoris {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 35px;
+}
+
+/* Effet Masonry Awwwards Level */
+.carte-favoris:nth-child(even) {
+  transform: translateY(20px);
+}
+
+.etat-vide {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 60px 40px;
+  text-align: center;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.vide-icone {
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+  opacity: 0.6;
+}
+
+.etat-vide h2 {
+  font-size: 1.8rem;
+  color: var(--texte-principal);
+  margin: 0;
+}
+
+.etat-vide p {
+  color: var(--texte-secondaire);
+  line-height: 1.6;
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.bouton-recherche {
+  background: linear-gradient(135deg, var(--accent-primaire), #1a83bb);
+  color: #060e20;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 15px;
+  box-shadow: 0 10px 30px rgba(59, 191, 250, 0.25);
+}
+
+.bouton-recherche:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(59, 191, 250, 0.4);
+}
+
+@media (max-width: 768px) {
+  .titre-page { font-size: 2.3rem; }
+  .carte-favoris:nth-child(even) { transform: translateY(0); }
+  .grille-favoris { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+}

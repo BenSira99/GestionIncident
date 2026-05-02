@@ -1,0 +1,16 @@
+<div class="carte-film-contenu animation-apparition" [routerLink]="['/details', film.imdbID]">
+  <div class="affiche-container">
+    <img [src]="obtenirAffiche()" [alt]="film.Title" class="affiche-img">
+    <div class="survol-overlay">
+      <span class="voir-details">Voir Détails</span>
+    </div>
+    <div class="favori-position">
+      <app-bouton-favori [film]="film"></app-bouton-favori>
+    </div>
+  </div>
+  <div class="infos-film">
+    <h3 class="titre-cliquable">{{ film.Title }}</h3>
+    <p class="annee-film">{{ film.Year }}</p>
+  </div>
+</div>
+

@@ -1,0 +1,25 @@
+<div class="favoris-page conteneur-principal animation-apparition">
+  
+  <div class="en-tete-page">
+    <h1 class="titre-page">Ma Collection <span class="vibrant">Obsidian</span></h1>
+    <p class="sous-titre">Vos films et séries préférés sauvegardés pour l'éternité.</p>
+  </div>
+
+  <!-- État vide si aucun favori n'est stocké -->
+  <div *ngIf="serviceFavoris.lesFavoris().length === 0" class="etat-vide effet-verre">
+    <div class="vide-icone">📁</div>
+    <h2>Votre collection est vide</h2>
+    <p>Explorez notre catalogue et ajoutez vos films coups de cœur pour les retrouver ici à tout moment.</p>
+    <button routerLink="/recherche" class="bouton-recherche">Découvrir des films</button>
+  </div>
+
+  <!-- Grille Masonry des favoris (Awwwards Style) -->
+  <div *ngIf="serviceFavoris.lesFavoris().length > 0" class="grille-favoris masonry-grid">
+    <app-carte-film 
+      *ngFor="let film of serviceFavoris.lesFavoris()" 
+      [film]="film" 
+      class="carte-favoris">
+    </app-carte-film>
+  </div>
+
+</div>

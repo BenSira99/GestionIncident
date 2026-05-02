@@ -1,0 +1,70 @@
+.entete-principale {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 0 5%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  margin: 20px 5%;
+}
+
+.conteneur-entete {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-cine {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 900;
+  font-size: 1.8rem;
+  cursor: pointer;
+  letter-spacing: -0.04em;
+}
+
+.vibrant { color: var(--accent-primaire); }
+.blanc { color: var(--texte-principal); }
+
+.navigation-liens {
+  display: flex;
+  gap: 30px;
+}
+
+.navigation-liens a {
+  text-decoration: none;
+  color: var(--texte-secondaire);
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.navigation-liens a:hover, .navigation-liens a.actif {
+  color: var(--accent-primaire);
+}
+
+.navigation-liens a.actif::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-primaire);
+  border-radius: 2px;
+}
+
+.badge-favoris {
+  background: var(--accent-primaire);
+  color: #060e20;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 2px 8px;
+  margin-left: 6px;
+  display: inline-block;
+  vertical-align: middle;
+  transition: background 0.3s ease;
+}
+

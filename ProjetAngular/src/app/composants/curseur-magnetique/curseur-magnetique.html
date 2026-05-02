@@ -1,0 +1,6 @@
+<div class="curseur-magnetique-conteneur">
+  <div #curseurExt class="curseur-externe" [class.curseur-actif]="estActif">
+    <span class="texte-curseur" *ngIf="texteCurseur">{{ texteCurseur }}</span>
+  </div>
+  <div #curseurInt class="curseur-interne"></div>
+</div>

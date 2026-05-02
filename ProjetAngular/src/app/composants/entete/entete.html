@@ -1,0 +1,16 @@
+<header class="entete-principale effet-verre">
+  <div class="conteneur-entete">
+    <div class="logo-cine" [routerLink]="['/']">
+      <span class="vibrant">Cine</span><span class="blanc">BenSira</span>
+    </div>
+    <nav class="navigation-liens">
+      <a routerLink="/" routerLinkActive="actif" [routerLinkActiveOptions]="{exact: true}">Accueil</a>
+      <a routerLink="/favoris" routerLinkActive="actif">
+        Ma Collection
+        <span class="badge-favoris" *ngIf="serviceFavoris.lesFavoris().length > 0">
+          {{ serviceFavoris.lesFavoris().length }}
+        </span>
+      </a>
+    </nav>
+  </div>
+</header>

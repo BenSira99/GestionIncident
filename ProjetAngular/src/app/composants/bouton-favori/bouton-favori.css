@@ -1,0 +1,57 @@
+.bouton-favori-container {
+  background: rgba(6, 14, 32, 0.4);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.4s var(--transition-rapide), background 0.4s var(--transition-rapide), transform 0.3s ease;
+  z-index: 10;
+  padding: 0;
+  color: var(--texte-principal);
+  outline: none;
+}
+
+.bouton-favori-container:hover {
+  background: rgba(10, 25, 47, 0.8);
+  border-color: rgba(59, 191, 250, 0.4);
+  transform: scale(1.08);
+}
+
+.bouton-favori-container.actif {
+  color: #ff4d4d;
+  border-color: rgba(255, 77, 77, 0.4);
+  background: rgba(255, 77, 77, 0.1);
+}
+
+.icone-coeur {
+  width: 22px;
+  height: 22px;
+  z-index: 2;
+  transition: transform 0.2s ease;
+}
+
+.effet-lueur {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,77,77,0.3) 0%, rgba(255,77,77,0) 70%);
+  z-index: 1;
+  animation: pulsation-lueur 2s infinite alternate ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes pulsation-lueur {
+  0% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.3); }
+}

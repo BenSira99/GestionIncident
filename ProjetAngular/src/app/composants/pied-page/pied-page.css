@@ -1,0 +1,11 @@
+.pied-page {
+  margin: 50px 5% 20px;
+  padding: 20px;
+  text-align: center;
+  color: var(--texte-secondaire);
+  font-size: 0.9rem;
+}
+
+.contenu-pied-page p {
+  margin: 5px 0;
+}

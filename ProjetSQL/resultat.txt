@@ -1,0 +1,84 @@
+
+Table cr��e.
+
+
+Table cr��e.
+
+
+Table cr��e.
+
+
+1 ligne cr��e.
+
+
+1 ligne cr��e.
+
+
+1 ligne cr��e.
+
+
+1 ligne cr��e.
+
+
+1 ligne cr��e.
+
+
+1 ligne cr��e.
+
+
+1 ligne cr��e.
+
+
+1 ligne cr��e.
+
+
+1 ligne cr��e.
+
+
+Validation effectu�e.
+
+
+Proc�dure cr��e.
+
+
+Fonction cr��e.
+
+
+Proc�dure cr��e.
+
+
+Proc�dure cr��e.
+
+----------------------------------------------------                            
+-- DEBUT DES TESTS DES PROCEDURES ET FONCTIONS    --                            
+----------------------------------------------------                            
+>>> Action 1 : L'etudiant 1 emprunte le livre 101...                            
+Succes : Le livre a ete emprunte par l'etudiant.                                
+>>> Action 2 : L'etudiant 1 emprunte le livre 102...                            
+Succes : Le livre a ete emprunte par l'etudiant.                                
+>>> Action 3 : Calcul du nombre total d'emprunts...                             
+Nombre total d'emprunts pour l'etudiant 1 : 2                                   
+>>> Action 4 : Affichage de l'historique des emprunts...                        
+----------------------------------------------------                            
+Historique des emprunts pour : Alice Martin                                     
+----------------------------------------------------                            
+Livre : Algorithmique Avancee               | Emprunte le : 02/05/2026 | Statut 
+: En cours                                                                      
+Livre : Bases de donnees relationnelles     | Emprunte le : 02/05/2026 | Statut 
+: En cours                                                                      
+>>> Action 5 : Retour du livre (emprunt ID 1)...                                
+Succes : Le livre a bien ete retourne et le stock mis a jour.                   
+>>> Action 6 : Verification de l'historique apres retour...                     
+----------------------------------------------------                            
+Historique des emprunts pour : Alice Martin                                     
+----------------------------------------------------                            
+Livre : Algorithmique Avancee               | Emprunte le : 02/05/2026 |        
+Retourne le : 02/05/2026                                                        
+Livre : Bases de donnees relationnelles     | Emprunte le : 02/05/2026 | Statut 
+: En cours                                                                      
+----------------------------------------------------                            
+-- FIN DES TESTS                                  --                            
+----------------------------------------------------                            
+
+Proc�dure PL/SQL termin�e avec succ�s.
+

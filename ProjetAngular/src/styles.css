@@ -1,0 +1,106 @@
+/* Design System : CineBenSira Obsidian */
+:root {
+  /* Palette de Couleurs Obsidian */
+  --fond-primaire: #060e20;
+  --fond-secondaire: #0a192f;
+  --accent-primaire: #3bbffa;
+  --accent-secondaire: #70e1f5;
+  --texte-principal: #f8f9fa;
+  --texte-secondaire: #8892b0;
+  --verre: rgba(10, 25, 47, 0.7);
+  --error: #ff4d4d;
+  
+  /* Typographie */
+  --police-principale: 'Inter', system-ui, -apple-system, sans-serif;
+  --police-titre: 'Outfit', sans-serif;
+  
+  /* Espacement & Bordures */
+  --radius: 16px;
+  --radius-bouton: 40px;
+  --transition-rapide: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--police-principale);
+  background-color: var(--fond-primaire);
+  color: var(--texte-principal);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body.dark-theme {
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(220, 80%, 15%, 1) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(200, 80%, 10%, 1) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, hsla(190, 80%, 15%, 1) 0, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Scrollbar CineBenSira Ultra-Sleek */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--fond-primaire);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(59, 191, 250, 0.2);
+  border-radius: 10px;
+  transition: background 0.3s var(--transition-rapide);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primaire);
+}
+
+/* Utilitaires CineBenSira Obsidian */
+.effet-verre {
+  background: var(--verre);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.animation-apparition {
+  animation: glissementApparition 0.6s var(--transition-rapide) forwards;
+  opacity: 0;
+}
+
+@keyframes glissementApparition {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s var(--transition-rapide);
+}
+
+button {
+  font-family: var(--police-principale);
+}
+
+.conteneur-principal {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 8%;
+  width: 100%;
+}
+
+
