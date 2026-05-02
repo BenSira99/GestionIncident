@@ -6,4 +6,4 @@
 .dbeaver/
 .temp/
 *.tmp
-ProjetSQL\rapport_plsql.docx
+documentation/*
