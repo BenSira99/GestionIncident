@@ -49,7 +49,7 @@ public class InscriptionServlet extends HttpServlet {
         u.setNiveauExpertise(niveauExpertise);
         u.setEstDisponible("TECHNICIEN".equals(roleStr));
 
-        HttpSession session = request.getSession();
+        jakarta.servlet.http.HttpSession session = request.getSession();
         if (utilisateurDAO.creer(u)) {
             session.setAttribute("inscriptionMessage", "Inscription réussie ! Votre compte doit être validé par la DSI avant de pouvoir vous connecter.");
             response.sendRedirect("connexion.jsp");
