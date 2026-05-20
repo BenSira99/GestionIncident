@@ -1,0 +1,57 @@
+/* Selection de Role (Cards) */
+.selection-role {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.selection-role input[type="radio"] {
+    display: none !important;
+}
+
+.carte-role {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--bordure);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.carte-role:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+
+.carte-role .icone {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.carte-role .titre {
+    font-weight: 600;
+    color: white;
+    font-size: 1rem;
+    display: block;
+}
+
+.carte-role .desc {
+    font-size: 0.75rem;
+    color: var(--texte-muet);
+    margin-top: 4px;
+}
+
+.selection-role input[type="radio"]:checked + .carte-role {
+    background: rgba(99, 102, 241, 0.15);
+    border-color: var(--couleur-primaire);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+}
+
+.selection-role input[type="radio"]:checked + .carte-role .titre {
+    color: var(--couleur-primaire);
+}

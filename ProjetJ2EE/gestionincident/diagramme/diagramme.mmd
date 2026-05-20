@@ -1,0 +1,385 @@
+classDiagram
+
+    %% ============================================================
+    %%                        ENUMERATIONS
+    %% ============================================================
+
+    class StatutIncident {
+        <<enumeration>>
+        OUVERT
+        EN_COURS
+        RESOLU
+        FERME
+        REJETE
+    }
+
+    class PrioriteIncident {
+        <<enumeration>>
+        FAIBLE
+        MOYENNE
+        HAUTE
+        CRITIQUE
+    }
+
+    class ComplexiteIncident {
+        <<enumeration>>
+        SIMPLE
+        MODEREE
+        COMPLEXE
+        TRES_COMPLEXE
+    }
+
+    class StatutAffectation {
+        <<enumeration>>
+        EN_ATTENTE
+        ACCEPTEE
+        EN_COURS
+        TERMINEE
+        REJETEE
+    }
+
+    class RoleUtilisateur {
+        <<enumeration>>
+        EMPLOYE
+        TECHNICIEN
+        DSI
+    }
+
+    class TypeIncident {
+        <<enumeration>>
+        HARDWARE
+        SOFTWARE
+    }
+
+    class TypeMateriel {
+        <<enumeration>>
+        ORDINATEUR
+        IMPRIMANTE
+        SERVEUR
+        EQUIPEMENT_RESEAU
+        TELEPHONE
+        PERIPHERIQUE
+        AUTRE
+    }
+
+    %% ============================================================
+    %%                        INTERFACES
+    %% ============================================================
+
+    class IAuthentifiable {
+        <<interface>>
+        +seConnecter(email : String, motDePasse : String) boolean
+        +seDeconnecter() void
+        +changerMotDePasse(ancien : String, nouveau : String) boolean
+        +estActif() boolean
+    }
+
+    class IReportable {
+        <<interface>>
+        +soumettreIncident(incident : Incident) boolean
+        +consulterMesIncidents() List~Incident~
+        +annulerIncident(idIncident : Long) boolean
+        +donnerFeedback(idIncident : Long, feedback : Feedback) boolean
+    }
+
+    class IStatistiques {
+        <<interface>>
+        +getStatistiques() Map~String_Object~
+        +getTauxResolution() double
+        +getTempsResolutionMoyen() double
+    }
+
+    %% ============================================================
+    %%                     CLASSES METIER
+    %% ============================================================
+
+    class Utilisateur {
+        <<abstract>>
+        -id : Long
+        -nom : String
+        -prenom : String
+        -email : String
+        -motDePasseHash : String
+        -telephone : String
+        -actif : boolean
+        -dateCreation : LocalDateTime
+        -derniereConnexion : LocalDateTime
+        -role : RoleUtilisateur
+        -ville : Ville
+        +getId() Long
+        +getNom() String
+        +getPrenom() String
+        +getNomComplet() String
+        +getEmail() String
+        +getTelephone() String
+        +getRole() RoleUtilisateur
+        +getVille() Ville
+        +isActif() boolean
+        +setActif(actif : boolean) void
+        +setDerniereConnexion(date : LocalDateTime) void
+        +setVille(ville : Ville) void
+        +toString() String
+    }
+
+    class Employe {
+        -matricule : String
+        -departement : String
+        -poste : String
+        +getMatricule() String
+        +getDepartement() String
+        +getPoste() String
+        +soumettreIncident(incident : Incident) boolean
+        +consulterMesIncidents() List~Incident~
+        +annulerIncident(idIncident : Long) boolean
+        +donnerFeedback(idIncident : Long, feedback : Feedback) boolean
+        +seConnecter(email : String, motDePasse : String) boolean
+        +seDeconnecter() void
+        +changerMotDePasse(ancien : String, nouveau : String) boolean
+        +estActif() boolean
+    }
+
+    class Technicien {
+        -specialites : String
+        -disponible : boolean
+        -niveauExpertise : int
+        +getSpecialites() String
+        +isDisponible() boolean
+        +getNiveauExpertise() int
+        +setDisponible(disponible : boolean) void
+        +accepterAffectation(idAffectation : Long) boolean
+        +rejeterAffectation(idAffectation : Long, motif : String) boolean
+        +terminerIntervention(idAffectation : Long, rapport : String) boolean
+        +consulterMesAffectations() List~Affectation~
+        +getMesStatistiques() StatistiqueTechnicien
+        +seConnecter(email : String, motDePasse : String) boolean
+        +seDeconnecter() void
+        +changerMotDePasse(ancien : String, nouveau : String) boolean
+        +estActif() boolean
+        +getStatistiques() Map~String_Object~
+        +getTauxResolution() double
+        +getTempsResolutionMoyen() double
+    }
+
+    class DSI {
+        +consulterIncidentParVille(idVille : Long) List~Incident~
+        +consulterTechniciensDisponibles() List~Technicien~
+        +affecterTechnicien(idIncident : Long, idTechnicien : Long) Affectation
+        +affecterPlusieurs(idIncident : Long, idTechniciens : List~Long~) List~Affectation~
+        +desaffecterTechnicien(idAffectation : Long) boolean
+        +modifierPriorite(idIncident : Long, priorite : PrioriteIncident) boolean
+        +modifierComplexite(idIncident : Long, complexite : ComplexiteIncident) boolean
+        +cloturerIncident(idIncident : Long) boolean
+        +rejeterIncident(idIncident : Long, motif : String) boolean
+        +consulterTousIncidents(filtres : Map~String_Object~) List~Incident~
+        +genererRapport(dateDebut : LocalDate, dateFin : LocalDate) Rapport
+        +seConnecter(email : String, motDePasse : String) boolean
+        +seDeconnecter() void
+        +changerMotDePasse(ancien : String, nouveau : String) boolean
+        +estActif() boolean
+        +getStatistiques() Map~String_Object~
+        +getTauxResolution() double
+        +getTempsResolutionMoyen() double
+    }
+
+    class Incident {
+        -id : Long
+        -titre : String
+        -description : String
+        -dateOuverture : LocalDateTime
+        -dateMiseAJour : LocalDateTime
+        -dateCloture : LocalDateTime
+        -statut : StatutIncident
+        -priorite : PrioriteIncident
+        -complexite : ComplexiteIncident
+        -typeIncident : TypeIncident
+        -cheminPieceJointe : String
+        -employe : Employe
+        -materiel : Materiel
+        -categorieIncident : CategorieIncident
+        +getId() Long
+        +getTitre() String
+        +getDescription() String
+        +getDateOuverture() LocalDateTime
+        +getDateCloture() LocalDateTime
+        +getStatut() StatutIncident
+        +getPriorite() PrioriteIncident
+        +getComplexite() ComplexiteIncident
+        +getTypeIncident() TypeIncident
+        +getEmploye() Employe
+        +getMateriel() Materiel
+        +getCategorieIncident() CategorieIncident
+        +setStatut(statut : StatutIncident) void
+        +setPriorite(priorite : PrioriteIncident) void
+        +setComplexite(complexite : ComplexiteIncident) void
+        +setTypeIncident(type : TypeIncident) void
+        +setDateCloture(date : LocalDateTime) void
+        +getDureeResolutionHeures() long
+        +estEnRetard() boolean
+        +toString() String
+    }
+
+    class Materiel {
+        -id : Long
+        -nom : String
+        -numeroSerie : String
+        -marque : String
+        -modele : String
+        -typeMateriel : TypeMateriel
+        -dateAcquisition : LocalDate
+        -actif : boolean
+        +getId() Long
+        +getNom() String
+        +getNumeroSerie() String
+        +getMarque() String
+        +getModele() String
+        +getTypeMateriel() TypeMateriel
+        +getDateAcquisition() LocalDate
+        +isActif() boolean
+        +setActif(actif : boolean) void
+        +toString() String
+    }
+
+    class CategorieIncident {
+        -id : Long
+        -libelle : String
+        -description : String
+        -delaiResolutionHeures : int
+        -coefficientComplexite : double
+        +getId() Long
+        +getLibelle() String
+        +getDescription() String
+        +getDelaiResolutionHeures() int
+        +getCoefficientComplexite() double
+        +toString() String
+    }
+
+    class Affectation {
+        -id : Long
+        -incident : Incident
+        -technicien : Technicien
+        -dateAffectation : LocalDateTime
+        -dateDebutIntervention : LocalDateTime
+        -dateFinIntervention : LocalDateTime
+        -statut : StatutAffectation
+        -rapportIntervention : String
+        -commentaireDSI : String
+        -motifRejet : String
+        +getId() Long
+        +getIncident() Incident
+        +getTechnicien() Technicien
+        +getDateAffectation() LocalDateTime
+        +getStatut() StatutAffectation
+        +getRapportIntervention() String
+        +getCommentaireDSI() String
+        +setStatut(statut : StatutAffectation) void
+        +setRapportIntervention(rapport : String) void
+        +setDateDebutIntervention(date : LocalDateTime) void
+        +setDateFinIntervention(date : LocalDateTime) void
+        +getDureeInterventionHeures() long
+        +toString() String
+    }
+
+    class Feedback {
+        -id : Long
+        -note : int
+        -commentaire : String
+        -dateCreation : LocalDateTime
+        -satisfait : boolean
+        -incident : Incident
+        -employe : Employe
+        +getId() Long
+        +getNote() int
+        +getCommentaire() String
+        +isSatisfait() boolean
+        +getIncident() Incident
+        +getEmploye() Employe
+        +getDateCreation() LocalDateTime
+        +validerNote() boolean
+        +toString() String
+    }
+
+    class StatistiqueTechnicien {
+        -id : Long
+        -nbIncidentsAffectes : int
+        -nbIncidentsResolus : int
+        -tempsResolutionMoyen : double
+        -tauxSucces : double
+        -technicien : Technicien
+        +getId() Long
+        +getTauxResolution() double
+        +getTempsResolutionMoyen() double
+        +actualiser(incident : Incident) void
+        +toString() String
+    }
+
+    class Ville {
+        -id : Long
+        -nom : String
+        -codePostal : String
+        -region : String
+        +getId() Long
+        +getNom() String
+        +getCodePostal() String
+        +getRegion() String
+        +toString() String
+    }
+
+    class Rapport {
+        -id : Long
+        -titre : String
+        -dateGeneration : LocalDateTime
+        -periodeDebut : LocalDate
+        -periodeFin : LocalDate
+        -totalIncidents : int
+        -totalResolus : int
+        -totalEnCours : int
+        -contenuJson : String
+        -generePar : DSI
+        +getId() Long
+        +getTitre() String
+        +getDateGeneration() LocalDateTime
+        +getTotalIncidents() int
+        +getTotalResolus() int
+        +getContenuJson() String
+        +getGenerePar() DSI
+        +getTauxResolutionGlobal() double
+        +toString() String
+    }
+
+    %% ============================================================
+    %%                        RELATIONS
+    %% ============================================================
+
+    %% Héritage
+    Utilisateur <|-- Employe
+    Utilisateur <|-- Technicien
+    Utilisateur <|-- DSI
+
+    %% Implémentation interfaces
+    Utilisateur ..|> IAuthentifiable
+    Employe ..|> IReportable
+    DSI ..|> IStatistiques
+
+    %% Associations
+    Utilisateur "*" --> "1" Ville : estSituéDans
+
+    Incident "1" --> "1" Employe : soumisParr
+    Incident "1" --> "1" Materiel : concerneLe
+    Incident "1" --> "1" CategorieIncident : estClassifiéPar
+    Affectation "*" --> "1" Incident : concerneL
+    Affectation "*" --> "1" Technicien : estAssignéeA
+
+    Feedback "0..1" --> "1" Incident : evalueL
+    Feedback "*" --> "1" Employe : redigéPar
+
+    Rapport "*" --> "1" DSI : genereParr
+    StatistiqueTechnicien "1" --> "1" Technicien : concerneLe
+
+    %% Dépendances Enums
+    Incident ..> StatutIncident : utilise
+    Incident ..> PrioriteIncident : utilise
+    Incident ..> ComplexiteIncident : utilise
+    Incident ..> TypeIncident : utilise
+    Affectation ..> StatutAffectation : utilise
+    Utilisateur ..> RoleUtilisateur : utilise
+    Materiel ..> TypeMateriel : utilise

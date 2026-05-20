@@ -1,0 +1,121 @@
+:root {
+    --couleur-primaire: #6366f1;
+    --couleur-secondaire: #4f46e5;
+    --fond-sombre: #0f172a;
+    --surface: rgba(255, 255, 255, 0.05);
+    --bordure: rgba(255, 255, 255, 0.1);
+    --texte: #f8fafc;
+    --texte-muet: #94a3b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--fond-sombre);
+    color: var(--texte);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.conteneur-auth {
+    display: flex;
+    width: 1000px;
+    height: 600px;
+    background: var(--surface);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--bordure);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.visuel {
+    flex: 1.2;
+    background: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop') center/cover;
+    position: relative;
+}
+
+.visuel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(15, 23, 42, 0.8), transparent);
+}
+
+.formulaire-section {
+    flex: 1;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+p.sous-titre {
+    color: var(--texte-muet);
+    margin-bottom: 32px;
+}
+
+.groupe-champ {
+    margin-bottom: 24px;
+}
+
+label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--texte-muet);
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--bordure);
+    padding: 12px 16px;
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--couleur-primaire);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+button {
+    width: 100%;
+    background: var(--couleur-primaire);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+button:hover {
+    background: var(--couleur-secondaire);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}

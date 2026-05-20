@@ -1,0 +1,75 @@
+graph LR
+    %% Hiérarchie des Acteurs
+    USER((Utilisateur))
+    EMP((Employé)) ~~~ TECH((Technicien))
+    TECH ~~~ DSI((DSI))
+
+    EMP ----> USER
+    TECH ----> USER
+    DSI ----> USER
+
+    subgraph "Système de Gestion d'Incidents"
+        direction TB
+        
+        subgraph "Sécurité & Profil"
+            UC_LOGIN(Se connecter)
+            UC_LOGOUT(Se déconnecter)
+            UC_PROFIL(Gérer son profil et Ville)
+        end
+
+        subgraph "Espace Employé"
+            UC1(Déclarer un incident)
+            UC1_SPEC(Préciser Type HW/SW et Urgence)
+            UC2(Suivre l'état d'avancement)
+            UC3(Annuler un incident ouvert)
+            UC4(Évaluer la résolution et Feedback)
+            
+            UC1 -.->|include| UC1_SPEC
+        end
+
+        subgraph "Espace Technicien"
+            UC5(Consulter la liste des affectations)
+            UC6(Prendre en charge l'intervention)
+            UC6_STAT(Mettre à jour le statut)
+            UC6_REP(Rédiger le rapport d'intervention)
+            UC7(Consulter ses statistiques)
+
+            UC6 -.->|include| UC6_STAT
+            UC6 -.->|include| UC6_REP
+        end
+
+        subgraph "Espace DSI"
+            UC8(Superviser le parc complet d'incidents)
+            UC8_FILT(Filtrer par Ville/Type/Tech)
+            UC9(Assigner un technicien spécifique)
+            UC10(Clôturer ou Rejeter un incident)
+            UC11(Générer statistiques et rapports)
+
+            UC8 -.->|include| UC8_FILT
+        end
+    end
+
+    %% Connexions Parent
+    USER --- UC_LOGIN
+    USER --- UC_LOGOUT
+    USER --- UC_PROFIL
+
+    %% Connexions métier Employé
+    EMP --- UC1
+    EMP --- UC2
+    EMP --- UC3
+    EMP --- UC4
+
+    %% Connexions métier Technicien
+    TECH --- UC5
+    TECH --- UC6
+    TECH --- UC7
+
+    %% Connexions métier DSI
+    DSI --- UC8
+    DSI --- UC9
+    DSI --- UC10
+    DSI --- UC11
+
+    %% Relations d'extension
+    UC4 -.->|si résolu| UC2
